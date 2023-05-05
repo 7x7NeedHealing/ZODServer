@@ -31,7 +31,7 @@ router.post('/updateUserInfo', (req, res) => {
     const query = 'UPDATE zod_user SET ps=?, nickname=?, phone=?, email=? WHERE account = ?;'
     connection.query(query, [newData.ps, newData.nickname, newData.phone, newData.email, newData.account], (error) => {
         if (error) throw error;
-        res.send('用户信息更改成功');
+        // res.send('用户信息更改成功');
         
     });
 });
@@ -41,7 +41,7 @@ router.post('/updateUserStatus', (req, res) => {
     const query = 'UPDATE zod_user SET status = ? WHERE account = ?;'
     connection.query(query, [newData.status, newData.account], (error) => {
         if (error) throw error;
-        res.send('用户状态更改成功');
+        // res.send('用户状态更改成功');
         
     });
 });
@@ -51,7 +51,7 @@ router.post('/updateBlog', (req, res) => {
     const query = 'UPDATE zod_blog SET content = ? ,title = ? WHERE blogId = ?;'
     connection.query(query, [newData.content, newData.title,newData.blogId], (error) => {
         if (error) throw error;
-        res.send('博客内容修改成功');
+        // res.send('博客内容修改成功');
         
     });
 });
@@ -61,7 +61,7 @@ router.post('/updateBlogStatus', (req, res) => {
     const query = 'UPDATE zod_blog SET status = ? WHERE blogId = ?;'
     connection.query(query, [newData.status, newData.blogId], (error) => {
         if (error) throw error;
-        res.send('博客状态修改成功');
+        // res.send('博客状态修改成功');
         
     });
 });
@@ -71,7 +71,7 @@ router.post('/updateTodo', (req, res) => {
     const query = 'UPDATE zod_todo SET content = ? WHERE todoId = ?;'
     connection.query(query, [newData.content, newData.todoId], (error) => {
         if (error) throw error;
-        res.send('待办内容修改成功');
+        // res.send('待办内容修改成功');
         
     });
 });
@@ -81,7 +81,7 @@ router.post('/updateTodoStatus', (req, res) => {
     const query = 'UPDATE zod_todo SET status = ? , endTime = ? WHERE todoId = ?;'
     connection.query(query, [newData.status,newData.endTime, newData.todoId], (error) => {
         if (error) throw error;
-        res.send('待办状态修改成功');
+        // res.send('待办状态修改成功');
         
     });
 });

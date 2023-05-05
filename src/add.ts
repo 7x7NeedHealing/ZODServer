@@ -165,10 +165,7 @@ router.post('/reportComment', (req, res) => {
     connection.query(query, (error) => {
         if (error) throw error;
         res.send('举报成功');
-        // console.log(req.body, req.query);
 
-        // res.send(newData.account)
-        // res.send(newData.ps)
     });
 });
 module.exports = router

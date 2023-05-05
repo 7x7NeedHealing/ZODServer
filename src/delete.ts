@@ -36,7 +36,7 @@ router.get('/deleteBlog', (req, res) => {
     const query = `DELETE FROM zod_blog WHERE blogId = ?`;
     connection.query(query, [blogId], (error) => {
         if (error) throw error;
-        res.send('博客' + blogId + '删除成功');
+        // res.send('博客' + blogId + '删除成功');
     });
 });
 // 3、删除待办
@@ -45,8 +45,8 @@ router.get('/deleteTodo', (req, res) => {
     const query = `DELETE FROM zod_todo WHERE todoId = ?`;
     connection.query(query, [todoId], (error) => {
         if (error) throw error;
-        res.send('待办' + todoId + '删除成功');
-        console.log(todoId,req.body,req.query);
+        // res.send('待办' + todoId + '删除成功');
+        // console.log(todoId,req.body,req.query);
         
     });
 });
@@ -56,7 +56,7 @@ router.get('/deleteNotice', (req, res) => {
     const query = `DELETE FROM zod_notice WHERE content = ?`;
     connection.query(query, [content], (error) => {
         if (error) throw error;
-        res.send('通告' + content + '删除成功');
+        // res.send('通告' + content + '删除成功');
     });
 });
 // 6、删除历史记录
@@ -66,7 +66,7 @@ router.get('/deleteBlogHistoryById', (req, res) => {
     const query = 'DELETE from zod_history WHERE blogId = ? And account = ?';
     connection.query(query, [blogId,account],(error, results) => {
         if (error) throw error;
-        res.send(results);
+        // res.send(results);
     });
 });
 // 7、删除收藏
@@ -76,7 +76,7 @@ router.get('/deleteFavorite', (req, res) => {
     const query = 'DELETE from zod_favorite WHERE blogId = ? And account = ?';
     connection.query(query, [blogId,account],(error, results) => {
         if (error) throw error;
-        res.send(results);
+        // res.send(results);
     });
 });
 // 8、删除被举报的评论
@@ -85,7 +85,7 @@ router.get('/deleteComment', (req, res) => {
     const query = 'DELETE from zod_reportComments WHERE commentId = ?';
     connection.query(query, [commentId],(error, results) => {
         if (error) throw error;
-        res.send(results);
+        // res.send(results);
     });
 });
 module.exports = router

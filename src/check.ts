@@ -66,12 +66,7 @@ const router: Router = express.Router()
 // 获取token
 router.get('/getToken', (req, res) => {
     const account = req.query.account
-    // const query = 'SELECT account,email,nickname,phone,ps FROM zod_user WHERE account = ?';
     const token = generateToken({ account: account })
-    // connection.query(query, [account],(error, results) => {
-    //     if (error) throw error;
-    //     res.send(results);
-    // });
     res.send({ token: token });
 });
 // 登录
@@ -86,10 +81,20 @@ router.get('/login', (req, res) => {
         res.send(results);
     });
 });
+// 管理员登录
+router.get('/adminLogin', (req, res) => {
+    const account = req.query.account;
+    const password = req.query.password;
+    const query = 'SELECT account FROM zod_admin WHERE account = ? AND ps = ?';
+    connection.query(query, [ account, password], (error, results) => {
+        if (error) throw error;
+        res.send(results);
+    });
+});
 // 查询用户信息
 router.get('/checkUserInfo', (req, res) => {
     const account = req.query.account
-    const query = 'SELECT account,email,nickname,phone,ps FROM zod_user WHERE account = ?';
+    const query = 'SELECT account,email,nickname,phone,ps FROM zod_user WHERE account = ? ';
     connection.query(query, [account], (error, results) => {
         if (error) throw error;
         res.send(results);
@@ -188,7 +193,7 @@ router.get('/checkNotice', (req, res) => {
 // 查询全部博客的同时在【用户表】查询【博客】fromId对应的account，然后将用户nickname取到。
 router.get('/checkBlogAndInfo', (req, res) => {
     const page: number = <number> <unknown>req.query.page;
-    const query = `SELECT * FROM zod_blog JOIN zod_user ON fromId = account ORDER BY releaseTime DESC LIMIT ${page}, 4`;
+    const query = `SELECT * FROM zod_blog JOIN zod_user ON fromId = account WHERE zod_blog.status = 0 ORDER BY releaseTime DESC LIMIT ${page}, 4`;
     connection.query(query, (error, results) => {
         if (error) throw error;
         res.send(results);
@@ -324,7 +329,7 @@ router.get('/checkSomeoneBlog', (req, res) => {
     const fromId = req.query.fromId;
     const page: number = <number> <unknown>req.query.page;
     // DESC是降序，即按时间排序，最接近现在时间的排在顶部。
-    const query = `SELECT releaseTime,title,blogId FROM zod_blog WHERE fromId = ? ORDER BY releaseTime DESC LIMIT ${page}, 4`;
+    const query = `SELECT releaseTime,title,blogId FROM zod_blog WHERE fromId = ? AND status = 0 ORDER BY releaseTime DESC LIMIT ${page}, 4`;
     connection.query(query, [fromId], (error, results) => {
         if (error) throw error;
         res.send(results);
